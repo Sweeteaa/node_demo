@@ -4,7 +4,7 @@ const sql = `insert into nv_users_address set ?`
 const sql1 = `select * from nv_users_address`
 // const sql1 = `select * from nv_users_address where username=?`
 
-//新增上门地址
+//新增上门地址 http://127.0.0.1:3001/user/address/addAddress
 exports.addAddress = ((req,res)=>{
 
     db.query(sql, req.body, (err, results)=>{
@@ -18,6 +18,7 @@ exports.addAddress = ((req,res)=>{
     })
 })
 
+//获取地址列表 http://127.0.0.1:3001/user/address/getAddress
 exports.getAddress = ((req,res) =>{
     db.query(sql1, [req.params.username], (err, results)=>{
         // SQL 语句执行失败

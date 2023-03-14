@@ -6,4 +6,7 @@ router.post('/addOrder', service.addOrder)
 
 router.get('/getOrder', service.getOrder)
 
+router.post('/updateOrderState/:id', service.updateOrderState)
+
+
 module.exports = router

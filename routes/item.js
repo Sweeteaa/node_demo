@@ -13,4 +13,12 @@ router.get('/deleteCate/:id', expressJoi(delete_cate_schema), service.deleteCate
 
 router.get('/getDetail/:id', service.getDetail)
 
+router.get('/getUseOrder/:username', service.getUseOrder)
+
+router.post('/addUseOrder', service.addUseOrder)
+
+router.get('/getAllUseOrder', service.getAllUseOrder)
+
+router.post('/updateOrderState/:id', service.updateOrderState)
+
 module.exports = router

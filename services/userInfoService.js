@@ -2,14 +2,14 @@ const db = require('../db/dbConfig')
 const bcrypt = require('bcryptjs')
 
 
-const sql = `select id, username, Integral from ev_users where id=?`
-const sql1 = `update ev_users set ? where id=?`
+const sql = `select Integral from ev_users where username=?`
+const sql1 = `update ev_users set Integral=? where username=?`
 const sql2 = `select * from ev_users where id=?`
 const sql4 = `update ev_users set password=? where id=?`
 
-//获取用户信息
+//获取用户积分信息 http://127.0.0.1:3001/user/getInfo/:username
 exports.getInfo = ((req,res)=>{
-    db.query(sql, req.user.id, (err, results) => {
+    db.query(sql, req.params.username, (err, results) => {
         // 1. 执行 SQL 语句失败
         if (err) return res.send({status:1,message:err})
       
@@ -58,5 +58,17 @@ exports.updatePassword = ((req, res)=>{
             // 更新密码成功
             return res.send({status:0,message:'更新密码成功！'})
         })
+    })
+})
+
+//更新积分 http://127.0.0.1:3001/user/updateIntegral/:username
+exports.updateIntegral = ((req, res)=>{
+    db.query(`update ev_users set Integral=${req.body.Integral} where username='${req.params.username}'`,(err, results)=>{
+        if (err) return res.send({status:1,message:err})
+
+        if (results.affectedRows !== 1) return res.send({status:1, message:'修改用户积分失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'修改用户积分成功！'})
     })
 })

@@ -140,6 +140,8 @@ req.session
 
 获取指定物品：http://127.0.0.1:3001/user/items/getDetail
 
+查看换购物品订单：http://127.0.0.1:3001/user/items/getUseOrder
+
 新建上门地址：http://127.0.0.1:3001/user/address/addAddress
 
 新建上门地址：http://127.0.0.1:3001/user/address/getAddress
