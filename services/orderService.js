@@ -1,7 +1,7 @@
 const db = require('../db/dbConfig')
 
 const sql = `insert into nv_users_orders set ?`
-const sql1 = `select * from nv_users_orders`
+const sql1 = `select * from nv_users_orders where username=?`
 
 
 //新增订单 http://127.0.0.1:3001/user/order/addOrder
@@ -17,9 +17,9 @@ exports.addOrder = ((req, res)=>{
     })
 })
 
-//获取订单列表 http://127.0.0.1:3001/user/order/getOrder
+//获取指定用户订单列表 http://127.0.0.1:3001/user/order/getOrder/:username
 exports.getOrder = ((req, res)=>{
-    db.query(sql1, [req.params.username], (err, results)=>{
+    db.query(`select * from nv_users_orders where username='${req.params.username}'`, (err, results)=>{
         // SQL 语句执行失败
         if (err) return res.send({status:1, message:err})
 
@@ -28,7 +28,7 @@ exports.getOrder = ((req, res)=>{
             arr.push(value)
         }
 
-        res.send({status:0,message:'成功订单列表',data:arr})
+        res.send({status:0,message:'成功获得指定用户订单列表',data:arr})
     })
 })
 
