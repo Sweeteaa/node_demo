@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config')
 
 const sql = `select username, password, Integral from ev_users where username=?`
-const sql1 = `insert into ev_users set ?`
+const sql1 = `insert username, password, Integral into ev_users set ?`
 
 exports.signIn = ((req,res)=>{
     //1. 检测表单发送数据是否合法
@@ -13,6 +13,7 @@ exports.signIn = ((req,res)=>{
     //     return res.send({status:1, message:'用户名或密码格式不正确'})
     // }
 
+    // console.log(req.body)
     //2. 检测用户名是否被占用
     db.query(sql,[userinfo.username],(err,results)=>{
         {
@@ -24,7 +25,7 @@ exports.signIn = ((req,res)=>{
             }
             // res.cc('用户名可用', 0)
             //4. 插入新注册用户
-            db.query(sql1,{username:userinfo.username,password:userinfo.password},(err,results)=>{
+            db.query(`insert into ev_users set username='${userinfo.username}', password='${userinfo.password}', Integral=${userinfo.Integral}`,(err,results)=>{
                 {
                     if(err){
                         return res.send({status:1,message:err})

@@ -7,7 +7,7 @@ const password = joi
   .string()
   .pattern(/^[\S]{6,12}$/)
   .required()
-
+const Integral = joi.required()
 const id = joi.number().integer().min(1).required()
 
 // 注册和登录表单的验证规则对象
@@ -16,6 +16,15 @@ exports.reg_login_schema = {
   body: {
     username,
     password,
+  },
+}
+
+exports.reg_signIn_schema = {
+  // 表示需要对 req.body 中的数据进行验证
+  body: {
+    username,
+    password,
+    Integral
   },
 }
 

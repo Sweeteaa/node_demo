@@ -6,6 +6,6 @@ const {address_add_shame} = require('../utils/address')
 
 router.post('/addAddress', service.addAddress)//新增上门地址
 
-router.get('/getAddress', service.getAddress)//查找上门地址
+router.get('/getAddress/:username', service.getAddress)//查找上门地址
 
 module.exports = router

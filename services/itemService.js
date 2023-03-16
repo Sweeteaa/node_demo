@@ -124,15 +124,15 @@ exports.getAllUseOrder = ((req, res)=>{
     })
 })
 
-//更新用户回收订单状态 http://127.0.0.1:3001/user/items/updateOrderState/:id
-exports.updateOrderState = ((req, res)=>{
+//更新用户换购订单状态 http://127.0.0.1:3001/user/items/updateUseOrderState/:id
+exports.updateUseOrderState = ((req, res)=>{
     db.query(`update nv_users_useorders set state='${req.body.state}' where id=${req.params.id}`,(err, results)=>{
         if (err) return res.send({status:1,message:err})
 
-        if (results.affectedRows !== 1) return res.send({status:1, message:'更新用户回收订单状态失败！'})
+        if (results.affectedRows !== 1) return res.send({status:1, message:'更新用户换购订单状态失败！'})
 
         // 修改用户信息成功
-        return res.send({status:0, message:'更新用户回收订单状态成功！'})
+        return res.send({status:0, message:'更新用户换购订单状态成功！'})
     })
 })
 

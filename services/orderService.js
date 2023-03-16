@@ -32,9 +32,24 @@ exports.getOrder = ((req, res)=>{
     })
 })
 
+//获取指定用户订单列表 http://127.0.0.1:3001/user/order/getAllOrder
+exports.getAllOrder = ((req, res)=>{
+    db.query(`select * from nv_users_orders`, (err, results)=>{
+        // SQL 语句执行失败
+        if (err) return res.send({status:1, message:err})
+
+        let arr = []
+        for(let value of results){
+            arr.push(value)
+        }
+
+        res.send({status:0,message:'成功获得指定用户订单列表',data:arr})
+    })
+})
+
 //更新用户换购订单状态 http://127.0.0.1:3001/user/order/updateOrderState/:id
 exports.updateOrderState = ((req, res)=>{
-    db.query(`update nv_users_useorders set state='${req.body.state}' where id=${req.params.id}`,(err, results)=>{
+    db.query(`update nv_users_orders set state='${req.body.state}' where id=${req.params.id}`,(err, results)=>{
         if (err) return res.send({status:1,message:err})
 
         if (results.affectedRows !== 1) return res.send({status:1, message:'更新用户回收订单状态失败！'})
@@ -44,3 +59,14 @@ exports.updateOrderState = ((req, res)=>{
     })
 })
 
+//审核用户回收订单状态 http://127.0.0.1:3001/user/items/updateOrderAudit/:id
+exports.updateOrderAudit = ((req, res)=>{
+    db.query(`update nv_users_orders set audit='${req.body.audit}' where id=${req.params.id}`,(err, results)=>{
+        if (err) return res.send({status:1,message:err})
+
+        if (results.affectedRows !== 1) return res.send({status:1, message:'审核用户回收订单状态失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'更新用户回收订单审核状态成功！'})
+    })
+})

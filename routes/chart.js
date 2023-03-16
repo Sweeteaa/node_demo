@@ -8,5 +8,7 @@ router.get('/recyclecate/:type',  service.getRCate)
 
 router.get('/usecate/:type',  service.getUCate)
 
+router.get('/recycleorder/:state',  service.getROrder)
+
 
 module.exports = router
