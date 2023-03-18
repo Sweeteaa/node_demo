@@ -47,7 +47,7 @@ exports.getAllOrder = ((req, res)=>{
     })
 })
 
-//更新用户换购订单状态 http://127.0.0.1:3001/user/order/updateOrderState/:id
+//更新用户回收订单状态 http://127.0.0.1:3001/user/order/updateOrderState/:id
 exports.updateOrderState = ((req, res)=>{
     db.query(`update nv_users_orders set state='${req.body.state}' where id=${req.params.id}`,(err, results)=>{
         if (err) return res.send({status:1,message:err})
@@ -68,5 +68,29 @@ exports.updateOrderAudit = ((req, res)=>{
 
         // 修改用户信息成功
         return res.send({status:0, message:'更新用户回收订单审核状态成功！'})
+    })
+})
+
+//更新用户回收订单重量 http://127.0.0.1:3001/user/items/updateOrderWeight/:id
+exports.updateOrderWeight = ((req, res)=>{
+    db.query(`update nv_users_orders set weight='${req.body.weight}' where id=${req.params.id}`,(err, results)=>{
+        if (err) return res.send({status:1,message:err})
+
+        if (results.affectedRows !== 1) return res.send({status:1, message:'更新用户回收订单重量/数量失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'更新用户回收订单重量/数量成功！'})
+    })
+})
+
+//更新用户回收订单积分 http://127.0.0.1:3001/user/items/updateOrderIntegral/:id
+exports.updateOrderIntegral = ((req, res)=>{
+    db.query(`update nv_users_orders set Integral='${req.body.Integral}' where id=${req.params.id}`,(err, results)=>{
+        if (err) return res.send({status:1,message:err})
+
+        if (results.affectedRows !== 1) return res.send({status:1, message:'更新用户回收订单积分失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'更新用户回收订单积分成功！'})
     })
 })

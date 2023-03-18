@@ -12,4 +12,8 @@ router.post('/updateOrderState/:id', service.updateOrderState)
 
 router.post('/updateOrderAudit/:id', service.updateOrderAudit)
 
+router.post('/updateOrderWeight/:id', service.updateOrderWeight)
+
+router.post('/updateOrderIntegral/:id', service.updateOrderIntegral)
+
 module.exports = router
