@@ -6,7 +6,7 @@ const sql1 = `insert into nv_users_activityorder set ?`
 
 //新增活动 http://127.0.0.1:3001/user/activity/addActivity
 exports.addActivity = ((req, res)=>{
-    db.query(sql, req.body, (err, results)=>{
+    db.query(`insert into nv_users_activity set title='${req.body.title}', text='${req.body.text}', img='${req.body.img}', main='${req.body.main}', num=${req.body.num}, progress=${0}`, (err, results)=>{
         // SQL 语句执行失败
         if (err) return res.send({status:1, message:err})
           
