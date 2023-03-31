@@ -8,6 +8,8 @@ router.get('/recyclecate/:type',  service.getRCate)
 
 router.get('/recycleday/:addTime/:type',  service.getRDay)
 
+router.get('/useday/:addTime/:type',  service.getUDay)
+
 router.get('/usecate/:type',  service.getUCate)
 
 router.get('/recycleorder/:state',  service.getROrder)
