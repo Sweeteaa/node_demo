@@ -93,7 +93,7 @@ exports.getUseOrder = ((req, res)=>{
     })
 })
 
-//新增物品分类
+//新增换购订单
 exports.addUseOrder = ((req, res)=>{
     db.query(sql2, [req.body], (err, results) => {
         // SQL 语句执行失败
@@ -133,6 +133,18 @@ exports.updateUseOrderState = ((req, res)=>{
 
         // 修改用户信息成功
         return res.send({status:0, message:'更新用户换购订单状态成功！'})
+    })
+})
+
+//更新换购物品库存 http://127.0.0.1:3001/user/items/updateUseItemHas/:id
+exports.updateUseItemHas = ((req, res)=>{
+    db.query(`update ev_items_cate set has='${req.body.has}' where id=${req.params.id}`,(err, results)=>{
+        if (err) return res.send({status:1,message:err})
+
+        if (results.affectedRows !== 1) return res.send({status:1, message:'更新换购物品库存失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'更新换购物品库存成功！'})
     })
 })
 

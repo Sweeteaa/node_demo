@@ -21,5 +21,7 @@ router.get('/getAllUseOrder', service.getAllUseOrder)
 
 router.post('/updateUseOrderState/:id', service.updateUseOrderState)
 
+router.post('/updateUseItemHas/:id', service.updateUseItemHas)
+
 
 module.exports = router

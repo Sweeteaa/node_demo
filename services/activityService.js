@@ -34,14 +34,13 @@ exports.getActivity = ((req, res)=>{
 
 //删除指定活动 http://127.0.0.1:3001/user/activity/delActivityOrder/:id
 exports.delActivity = ((req, res)=>{
-    db.query(`delete from nv_users_activity where id=${req.params.id}`, (err, results)=>{
-        // SQL 语句执行失败
-        if (err) return res.send({status:1, message:err})
-          
-        // SQL 语句执行成功，但是影响行数不等于 1
-        if (results.affectedRows !== 1) return res.send({status:1, message:'删除指定活动失败'})
+    db.query(`update nv_users_activity set state='${req.body.state}' where id=${req.params.id}`, (err, results)=>{
+        if (err) return res.send({status:1,message:err})
 
-        res.send({status:0, message:'删除指定活动成功！'})
+        if (results.affectedRows !== 1) return res.send({status:1, message:'修改活动状态失败！'})
+
+        // 修改用户信息成功
+        return res.send({status:0, message:'修改活动状态成功！'})
     })
 })
 
